@@ -23,7 +23,7 @@ public class MoviesApiTest {
     private static final String BASE = "http://localhost:8080";
     private static MoviesServer server;
     private static HttpClient client;
-    private static final int port = 8080;
+    private static final int PORT = 8080;
     private static MoviesStore store;
     private static Gson gson;
 
@@ -31,7 +31,7 @@ public class MoviesApiTest {
     static void beforeAll() {
         store = new MoviesStore();
 
-        server = new MoviesServer(store, port);
+        server = new MoviesServer(store, PORT);
         server.start();
 
 
