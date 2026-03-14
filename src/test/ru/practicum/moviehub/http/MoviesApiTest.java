@@ -23,7 +23,7 @@ public class MoviesApiTest {
     private static final String BASE = "http://localhost:8080";
     private static MoviesServer server;
     private static HttpClient client;
-    private static final int PORT = 8080;
+    private static final int port = 8080;
     private static MoviesStore store;
     private static Gson gson;
 
@@ -31,7 +31,7 @@ public class MoviesApiTest {
     static void beforeAll() {
         store = new MoviesStore();
 
-        server = new MoviesServer(store ,PORT);
+        server = new MoviesServer(store, port);
         server.start();
 
 
@@ -79,8 +79,8 @@ public class MoviesApiTest {
     @Test
     void getMovies_returnsMoviesArray() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies")) // !!! Добавьте правильный URI
@@ -109,7 +109,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -133,7 +133,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -156,7 +156,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -179,7 +179,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -202,7 +202,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","text/html")
+                .header("Content-Type", "text/html")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -225,7 +225,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
@@ -244,8 +244,8 @@ public class MoviesApiTest {
     @Test
     void getMovie_returnsMovieById() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/1"))
@@ -263,9 +263,9 @@ public class MoviesApiTest {
                 "Content-Type должен содержать формат данных и кодировку");
 
 
-        Movie movie = gson.fromJson(resp.body().trim(),Movie.class);
+        Movie movie = gson.fromJson(resp.body().trim(), Movie.class);
 
-        Assertions.assertEquals(store.getMoviesCollection().getFirst(),movie,
+        Assertions.assertEquals(store.getMoviesCollection().getFirst(), movie,
                 "Проверяем соответствует ли фильм из ответа с фильмом из коллекции");
     }
 
@@ -273,8 +273,8 @@ public class MoviesApiTest {
     @Test
     void getMovie_returnsBadReqMovieNotFound() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/3"))
@@ -297,8 +297,8 @@ public class MoviesApiTest {
     @Test
     void getMovie_returnsBadReqIdIsNotNumber() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/test"))
@@ -320,8 +320,8 @@ public class MoviesApiTest {
     @Test
     void deleteMovie_returnsSuccess() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/1"))
@@ -347,8 +347,8 @@ public class MoviesApiTest {
     @Test
     void deleteMovie_returnsBadReqNotFound() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/3"))
@@ -370,8 +370,8 @@ public class MoviesApiTest {
     @Test
     void deleteMovie_returnsBadReqIsNotNumber() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies/test"))
@@ -393,9 +393,9 @@ public class MoviesApiTest {
     @Test
     void getMovie_returnsMovieByYear() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
-        store.addMovie(new Movie(3,"Форсаж",2001));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
+        store.addMovie(new Movie(3, "Форсаж", 2001));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies?year=2001"))
@@ -415,16 +415,16 @@ public class MoviesApiTest {
 
         ArrayList<Movie> movieArrayList = gson.fromJson(resp.body().trim(), new ListOfMoviesTypeToken().getType());
 
-        assertEquals(2,movieArrayList.size(),
+        assertEquals(2, movieArrayList.size(),
                 "Должно вернуться количество возвращенных фильмов, равное 2");
     }
 
     @Test
     void getMovie_returnsEmptyArrayByYear() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
-        store.addMovie(new Movie(3,"Форсаж",2001));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
+        store.addMovie(new Movie(3, "Форсаж", 2001));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies?year=2002"))
@@ -444,16 +444,16 @@ public class MoviesApiTest {
 
         ArrayList<Movie> movieArrayList = gson.fromJson(resp.body().trim(), new ListOfMoviesTypeToken().getType());
 
-        assertEquals(0,movieArrayList.size(),
+        assertEquals(0, movieArrayList.size(),
                 "Должен вернуться пустой массив");
     }
 
     @Test
     void getMovie_returnsBadReqIfYearNotNumber() throws Exception {
 
-        store.addMovie(new Movie(1,"Гарри Поттер и философский камень",2001));
-        store.addMovie(new Movie(2,"Назад в будущее",1985));
-        store.addMovie(new Movie(3,"Форсаж",2001));
+        store.addMovie(new Movie(1, "Гарри Поттер и философский камень", 2001));
+        store.addMovie(new Movie(2, "Назад в будущее", 1985));
+        store.addMovie(new Movie(3, "Форсаж", 2001));
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies?year=test"))
@@ -479,7 +479,7 @@ public class MoviesApiTest {
 
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
-                .header("Content-Type","text/html")
+                .header("Content-Type", "text/html")
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
